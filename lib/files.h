@@ -169,6 +169,17 @@ bool files_save_public(TPM2B_PUBLIC *public, const char *path);
 bool files_save_template(TPMT_PUBLIC *template, const char *path);
 
 /**
+ * Like files_load_template(), but doesn't report errors.
+ * @param path
+ *  The path containing the TPMT_PUBLIC to load from.
+ * @param public
+ *  The destination for the TPMT_PUBLIC.
+ * @return
+ *  true on success, false otherwise.
+ */
+bool files_load_template_silent(const char *path, TPMT_PUBLIC *public);
+
+/**
  * Loads a TPM2B_PUBLIC from disk that was saved with files_save_pubkey()
  * @param path
  *  The path to load from.
@@ -179,12 +190,31 @@ bool files_save_template(TPMT_PUBLIC *template, const char *path);
  */
 bool files_load_public(const char *path, TPM2B_PUBLIC *public);
 
+/**
+ * Like files_load_public(), but doesn't report errors.
+ * @param path
+ *  The path containing the TP2B_PUBLIC to load from.
+ * @param public
+ *  The destination for the TP2B_PUBLIC.
+ * @return
+ *  true on success, false otherwise.
+ */
 bool files_load_public_file(FILE *f, const char *path, TPM2B_PUBLIC *public);
 
 bool files_load_template(const char *path, TPMT_PUBLIC *public);
 
 bool files_load_template_file(FILE *f, const char *path, TPMT_PUBLIC *public);
 
+/**
+ * Like files_load_public(), but doesn't report errors.
+ * @param path
+ *  The path containing the TP2B_PUBLIC to load from.
+ * @param public
+ *  The destination for the TP2B_PUBLIC.
+ * @return
+ *  true on success, false otherwise.
+ */
+bool files_load_public_silent(const char *path, TPM2B_PUBLIC *public);
 
 /**
  * Serializes a TPMT_SIGNATURE to the file path provided.
@@ -207,6 +237,18 @@ bool files_save_signature(TPMT_SIGNATURE *signature, const char *path);
  *  true on success, false on error.
  */
 bool files_load_signature(const char *path, TPMT_SIGNATURE *signature);
+
+/**
+ * Like files_save)signature() but doesn't complain about libmu failures.
+ * Useful if you're trying to probe if its a plain or tss format signature.
+ * @param path
+ *  The path to load from.
+ * @param signature
+ *  The TPMT_SIGNATURE to load.
+ * @return
+ *  true on success, false on error.
+ */
+bool files_load_signature_silent(const char *path, TPMT_SIGNATURE *signature);
 
 /**
  * Serializes a TPMT_TK_VERIFIED to the file path provided.

@@ -35,6 +35,10 @@
 
  * tss2_*: tss2_setappdata now reads from file or stdin allowing to store also binary data
 
+ * tpm2\_checkqoute:
+   - Add EC support.
+   - Support loading *tss* signatures.
+
 ### 4.2 2020-04-08
 
  * Fix various issues reported by static analysis tools.
